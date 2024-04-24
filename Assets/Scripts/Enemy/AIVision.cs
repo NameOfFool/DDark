@@ -19,4 +19,11 @@ public class AIVision : MonoBehaviour
     {
         _agent.SetDestination(target.position);
     }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.TryGetComponent(out IHealth health))
+        {
+            health.CurrentHealth-=1;
+        }
+    }
 }
