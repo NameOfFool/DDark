@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,16 +8,16 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Player Properties")]
     public float MaxSpeed = 5f;
-    public float CurrentMoveSpeed{get{return MaxSpeed;}}
+    public float CurrentMoveSpeed { get { return MaxSpeed; } }
     private bool _isFacingRight = true;
     public bool isFacingRight
     {
         get => _isFacingRight;
         set
         {
-            if(_isFacingRight != value)
-                transform.localScale *=new Vector2(-1,1);
-                _isFacingRight = value;
+            if (_isFacingRight != value)
+                transform.localScale *= new Vector2(-1, 1);
+            _isFacingRight = value;
         }
     }
     private Vector2 moveInput;
@@ -38,9 +37,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Flip()
     {
-        if(moveInput.x >0 && !isFacingRight)
+        if (moveInput.x > 0 && !isFacingRight)
             isFacingRight = true;
-        else if(moveInput.x < 0 && isFacingRight)
+        else if (moveInput.x < 0 && isFacingRight)
             isFacingRight = false;
     }
     public void OnMove(InputAction.CallbackContext context)
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
             _anim.SetTrigger("Attack");
     }
 }

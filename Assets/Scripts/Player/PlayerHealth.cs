@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public uint InvincibleTime {get;set;}
 
-    void Start()
+    void Awake()
     {
         currentHealth = MaxHealth;
         _anim = GetComponent<Animator>();
