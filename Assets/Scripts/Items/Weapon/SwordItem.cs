@@ -10,9 +10,16 @@ public class SwordItem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.TryGetComponent(out IHealth health))
+        if (collision.gameObject.TryGetComponent(out IHealth health))
         {
-            health.CurrentHealth-=1;
+            health.CurrentHealth -= 1;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.TryGetComponent(out MainArmController arm))
+        {
+            arm.Item = this;
         }
     }
 }
