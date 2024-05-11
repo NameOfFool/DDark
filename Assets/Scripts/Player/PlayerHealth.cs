@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHealth
@@ -39,7 +36,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         }
     }
 
-    public uint InvincibleTime {get;set;}
+    [SerializeField] private uint invincibleTime;
+    public uint InvincibleTime {get=> invincibleTime;set=> invincibleTime = value;}
 
     void Awake()
     {
