@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SwordItem : MonoBehaviour
 {
+    private Animator anim;
     void Awake()
     {
+        anim = GetComponent<Animator>();
+    }
+    public void Attack()
+    {
+        anim.SetTrigger("Attack");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.AI;
+using NavMeshPlus.Components;
 
 public class RandomWalkLevelGeneration : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class RandomWalkLevelGeneration : MonoBehaviour
 
     [SerializeField] private TilemapVisualiser tilemapVisualiser;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private NavMeshSurface navmesh;
 
     public void RunProceduralGeneration()
     {
@@ -22,9 +26,11 @@ public class RandomWalkLevelGeneration : MonoBehaviour
         tilemapVisualiser.PaintFloorTiles(floorPoint);
         //Instantiate(player, new Vector3Int(0,0), Quaternion.identity);
     }
-    void Awake()
+    void Start()
     {
         RunProceduralGeneration();
+        navmesh.BuildNavMeshAsync();
+        //Instantiate(enemy, new Vector3Int(5,5,0), Quaternion.identity);
     }
     protected HashSet<Vector2Int> GetFloorPoints()
     {

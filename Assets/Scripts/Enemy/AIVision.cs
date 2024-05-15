@@ -6,11 +6,12 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AIVision : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    public Transform target;
     private NavMeshAgent _agent;
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
     }

@@ -14,17 +14,22 @@ public class PlayerController : MonoBehaviour
         set
         {
             if (_isFacingRight != value)
+            {
                 transform.localScale *= new Vector2(-1, 1);
+                
+            }
             _isFacingRight = value;
         }
     }
     private Vector2 moveInput;
     private Rigidbody2D _rb;
     private Animator _anim;
+    private MainArmController arm;
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        arm = GetComponentInChildren<MainArmController>();
     }
 
     // Update is called once per frame
@@ -47,6 +52,6 @@ public class PlayerController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started)
-            _anim.SetTrigger("Attack");
+            arm.Attack();
     }
 }
