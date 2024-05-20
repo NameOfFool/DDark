@@ -18,19 +18,28 @@ public class RandomWalkLevelGeneration : MonoBehaviour
     [SerializeField] private TilemapVisualiser tilemapVisualiser;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject enemy;
-    [SerializeField] private NavMeshSurface navmesh;
+    [SerializeField] private GameObject navmesh;
+    private bool isGenerationEnded = false;
 
     public void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPoint = GetFloorPoints();
         tilemapVisualiser.PaintFloorTiles(floorPoint);
+        isGenerationEnded = true;
         //Instantiate(player, new Vector3Int(0,0), Quaternion.identity);
     }
-    void Start()
+    void Awake()
     {
         RunProceduralGeneration();
-        navmesh.BuildNavMeshAsync();
-        //Instantiate(enemy, new Vector3Int(5,5,0), Quaternion.identity);
+        Instantiate(enemy, navmesh.transform.position, Quaternion.identity);
+    }
+    private void FixedUpdate()
+    {
+        if(isGenerationEnded)
+        {
+            navmesh.GetComponent<NavMeshGenerator>().GenerateNavMesh();
+            isGenerationEnded = false;
+        }
     }
     protected HashSet<Vector2Int> GetFloorPoints()
     {
