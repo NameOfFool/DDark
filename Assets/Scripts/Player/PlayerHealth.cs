@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IHealth
 {
     private Animator _anim;
+    private Rigidbody2D rb;
     public void Death()
     {
 
@@ -36,13 +37,20 @@ public class PlayerHealth : MonoBehaviour, IHealth
         }
     }
 
-    [SerializeField] private uint invincibleTime;
-    public uint InvincibleTime {get=> invincibleTime;set=> invincibleTime = value;}
+    
+       
+    public bool isInvincible { get; set; }
 
     void Awake()
     {
         currentHealth = MaxHealth;
         _anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+    public void Hurt(int damage, Vector2 knockback)
+    {
+        currentHealth -= damage;
+        rb.AddForce(knockback, ForceMode2D.Impulse);
     }
 
     void Update()

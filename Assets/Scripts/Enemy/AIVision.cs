@@ -24,7 +24,7 @@ public class AIVision : MonoBehaviour
     {
         if(col.gameObject.TryGetComponent(out IHealth health))
         {
-            health.CurrentHealth-=1;
+            health.Hurt(1, new(transform.lossyScale.x * 3, 0));
         }
     }
 }

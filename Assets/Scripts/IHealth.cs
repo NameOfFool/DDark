@@ -6,11 +6,16 @@ public interface IHealth
 {
     public int MaxHealth{get;set;}
     public int CurrentHealth{get; set;}
-    public uint InvincibleTime{get;set;}
+    public bool isInvincible{get;set;}
+
     //TODO Invimcible animation
     public void Death()
     {
 
+    }
+
+    public void Hurt(int damage, Vector2 knockback)
+    {
     }
 
 }

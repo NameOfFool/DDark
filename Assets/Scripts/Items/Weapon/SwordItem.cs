@@ -14,11 +14,11 @@ public class SwordItem : MonoBehaviour
         anim.SetTrigger("Attack");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void HurtTarget(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out IHealth health))
         {
-            health.CurrentHealth -= 1;
+            health.Hurt(1, new Vector2(transform.lossyScale.x* 100, 0));
         }
     }
     private void OnTriggerEnter2D(Collider2D col)
