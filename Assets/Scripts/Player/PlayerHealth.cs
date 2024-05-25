@@ -1,14 +1,17 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
     private Animator _anim;
+    [SerializeField] private Slider healthBar;
     private Rigidbody2D rb;
     public void Death()
     {
 
     }
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 100;
     public int MaxHealth
     {
         get => maxHealth;
@@ -23,22 +26,23 @@ public class PlayerHealth : MonoBehaviour, IHealth
         get => currentHealth;
         set
         {
-            if (value<= MaxHealth)
+            if (value <= MaxHealth)
             {
-                if(value < currentHealth)
+                if (value < currentHealth)
                 {
                     _anim.SetTrigger("Hurt");
                 }
-                if (value > 0)
+                if (value >= 0)
+                {
                     currentHealth = value;
-                else
-                    currentHealth = 0;
+                    healthBar.value = (float)currentHealth/maxHealth;
+                }
             }
         }
     }
 
-    
-       
+
+
     public bool isInvincible { get; set; }
 
     void Awake()
@@ -46,6 +50,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         currentHealth = MaxHealth;
         _anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        healthBar.value = (float)currentHealth/maxHealth;
+        CurrentHealth-=50;
     }
     public void Hurt(int damage, Vector2 knockback)
     {

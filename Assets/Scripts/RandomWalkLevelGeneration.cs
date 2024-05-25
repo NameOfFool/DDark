@@ -31,7 +31,7 @@ public class RandomWalkLevelGeneration : MonoBehaviour
     void Awake()
     {
         RunProceduralGeneration();
-        Instantiate(enemy, navmesh.transform.position, Quaternion.identity);
+        Instantiate(enemy, new Vector3Int(-1,-1), Quaternion.identity);
     }
     private void FixedUpdate()
     {
