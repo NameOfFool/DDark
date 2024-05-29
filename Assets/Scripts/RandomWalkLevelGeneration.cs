@@ -31,8 +31,7 @@ public class RandomWalkLevelGeneration : MonoBehaviour
     void Awake()
     {
         RunProceduralGeneration();
-        navmesh.BuildNavMeshAsync();
-        //Instantiate(enemy, new Vector3Int(5,5,0), Quaternion.identity);
+        Instantiate(enemy, new Vector3Int(-1,-1,0), Quaternion.identity);
     }
     protected HashSet<Vector2Int> GetFloorPoints()
     {
