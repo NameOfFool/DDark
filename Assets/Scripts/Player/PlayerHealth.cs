@@ -51,7 +51,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         _anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         healthBar.value = (float)currentHealth/maxHealth;
-        CurrentHealth-=50;
     }
     public void Hurt(int damage, Vector2 knockback)
     {

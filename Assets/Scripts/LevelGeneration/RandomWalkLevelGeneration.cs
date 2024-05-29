@@ -33,6 +33,14 @@ public class RandomWalkLevelGeneration : MonoBehaviour
         RunProceduralGeneration();
         Instantiate(enemy, new Vector3Int(-1,-1,0), Quaternion.identity);
     }
+    private void FixedUpdate()
+    {
+        if(isGenerationEnded)
+        {
+            navmesh.GetComponent<NavMeshGenerator>().GenerateNavMesh();
+            isGenerationEnded = false;
+        }
+    }
     protected HashSet<Vector2Int> GetFloorPoints()
     {
         Vector2Int currentPoint = startPoint;
