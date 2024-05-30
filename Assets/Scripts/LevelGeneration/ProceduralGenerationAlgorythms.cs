@@ -11,23 +11,26 @@ public static class ProceduralGenerationAlgorythms
             startPoint
         };
         Vector2Int prevPoint = startPoint;
-        for(int i = 0; i < distance; i++)
+        for (int i = 0; i < distance; i++)
         {
-            Vector2Int nextPoint = prevPoint + GetRandomDirection();
+            Vector2Int nextPoint = prevPoint + Direction2D.GetRandomDirection();
             path.Add(nextPoint);
             prevPoint = nextPoint;
         }
         return path;
     }
-    public static Vector2Int GetRandomDirection()
-    {
-        List<Vector2Int> directions = new()
+}
+public static class Direction2D
+{
+    public static List<Vector2Int> cardinalDirections = new()
         {
             Vector2Int.up,
             Vector2Int.right,
             Vector2Int.down,
             Vector2Int.left,
         };
-        return directions[Random.Range(0, directions.Count)];
+    public static Vector2Int GetRandomDirection()
+    {
+        return cardinalDirections[Random.Range(0, cardinalDirections.Count)];
     }
 }

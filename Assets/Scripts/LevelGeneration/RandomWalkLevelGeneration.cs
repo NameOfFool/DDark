@@ -7,24 +7,21 @@ using Random = UnityEngine.Random;
 using UnityEngine.AI;
 using NavMeshPlus.Components;
 
-public class RandomWalkLevelGeneration : MonoBehaviour
+public class RandomWalkLevelGeneration : AbstractGenerator
 {
-    [SerializeField] protected Vector2Int startPoint;
 
-    [SerializeField] private int iteration = 10;
-    [SerializeField] public int walkLength = 10;
-    [SerializeField] public bool eachIterationIsRandom = true;
+    [SerializeField] private RandomWalkSO randomWalkParams;
 
-    [SerializeField] private TilemapVisualiser tilemapVisualiser;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject navmesh;
     private bool isGenerationEnded = false;
 
-    public void RunProceduralGeneration()
+    public  override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPoint = GetFloorPoints();
-        tilemapVisualiser.PaintFloorTiles(floorPoint);
+        HashSet<Vector2Int> floorPoints = GetFloorPoints();
+        visualiser.PaintFloorTiles(floorPoints);
+        WallGenerator.CreateWalls(floorPoints, visualiser);
         isGenerationEnded = true;
         //Instantiate(player, new Vector3Int(0,0), Quaternion.identity);
     }
@@ -45,15 +42,16 @@ public class RandomWalkLevelGeneration : MonoBehaviour
     {
         Vector2Int currentPoint = startPoint;
         HashSet<Vector2Int> floorPoints = new HashSet<Vector2Int>();
-        for(int i = 0; i < iteration; i++)
+        for(int i = 0; i < randomWalkParams.iteration; i++)
         {
-            HashSet<Vector2Int> path = ProceduralGenerationAlgorythms.SimpleRandomWalk(currentPoint, walkLength);
+            HashSet<Vector2Int> path = ProceduralGenerationAlgorythms.SimpleRandomWalk(currentPoint, randomWalkParams.walkLength);
             floorPoints.UnionWith(path);
-            if(eachIterationIsRandom)
+            if(randomWalkParams.eachIterationIsRandom)
             {
                 currentPoint = floorPoints.ElementAt(Random.Range(0,floorPoints.Count));
             }
         }
         return floorPoints;
     }
+
 }
