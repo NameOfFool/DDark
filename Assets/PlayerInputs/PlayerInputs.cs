@@ -24,7 +24,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputs"",
     ""maps"": [
         {
-            ""name"": ""Base"",
+            ""name"": ""Player"",
             ""id"": ""51014eab-85a9-4259-80b5-b1c8160e0c58"",
             ""actions"": [
                 {
@@ -40,6 +40,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""9eb5f40e-a906-40d2-9e42-78c375aeb08a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8be22dc-8423-43e5-8336-fb6ecd69a8ae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -112,16 +121,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f9126ba-cd47-4fc8-80d8-252e01485c07"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Base
-        m_Base = asset.FindActionMap("Base", throwIfNotFound: true);
-        m_Base_Move = m_Base.FindAction("Move", throwIfNotFound: true);
-        m_Base_Attack = m_Base.FindAction("Attack", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_MenuInteraction = m_Player.FindAction("MenuInteraction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,35 +201,40 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Base
-    private readonly InputActionMap m_Base;
-    private List<IBaseActions> m_BaseActionsCallbackInterfaces = new List<IBaseActions>();
-    private readonly InputAction m_Base_Move;
-    private readonly InputAction m_Base_Attack;
-    public struct BaseActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_MenuInteraction;
+    public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
-        public BaseActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Base_Move;
-        public InputAction @Attack => m_Wrapper.m_Base_Attack;
-        public InputActionMap Get() { return m_Wrapper.m_Base; }
+        public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @MenuInteraction => m_Wrapper.m_Player_MenuInteraction;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(BaseActions set) { return set.Get(); }
-        public void AddCallbacks(IBaseActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_BaseActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_BaseActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @MenuInteraction.started += instance.OnMenuInteraction;
+            @MenuInteraction.performed += instance.OnMenuInteraction;
+            @MenuInteraction.canceled += instance.OnMenuInteraction;
         }
 
-        private void UnregisterCallbacks(IBaseActions instance)
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -216,26 +242,30 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @MenuInteraction.started -= instance.OnMenuInteraction;
+            @MenuInteraction.performed -= instance.OnMenuInteraction;
+            @MenuInteraction.canceled -= instance.OnMenuInteraction;
         }
 
-        public void RemoveCallbacks(IBaseActions instance)
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_BaseActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IBaseActions instance)
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_BaseActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_BaseActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public BaseActions @Base => new BaseActions(this);
-    public interface IBaseActions
+    public PlayerActions @Player => new PlayerActions(this);
+    public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnMenuInteraction(InputAction.CallbackContext context);
     }
 }

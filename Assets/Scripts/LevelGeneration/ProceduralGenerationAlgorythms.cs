@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class ProceduralGenerationAlgorythms
 {
+    ///
+    ///<summary>SimpleRandomWalk method generates hash set of point for tilemap rendering</summary>
+    ///<param name="distance"></param>
     public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPoint, int distance)
     {
         HashSet<Vector2Int> path = new()
@@ -20,6 +23,7 @@ public static class ProceduralGenerationAlgorythms
         return path;
     }
 }
+
 public static class Direction2D
 {
     public static List<Vector2Int> cardinalDirections = new()

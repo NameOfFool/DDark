@@ -15,29 +15,32 @@ public class RandomWalkLevelGeneration : AbstractGenerator
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject navmesh;
-    private bool isGenerationEnded = false;
+    private bool _isGenerationEnded = false;
 
-    public  override void RunProceduralGeneration()
+    public override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPoints = GetFloorPoints();
         visualiser.PaintFloorTiles(floorPoints);
         WallGenerator.CreateWalls(floorPoints, visualiser);
-        isGenerationEnded = true;
+        _isGenerationEnded = true;
         //Instantiate(player, new Vector3Int(0,0), Quaternion.identity);
     }
     void Awake()
     {
         RunProceduralGeneration();
-        Instantiate(enemy, new Vector3Int(-1,-1,0), Quaternion.identity);
+       // Instantiate(enemy, new Vector3Int(-1,-1,0), Quaternion.identity);
     }
     private void FixedUpdate()
     {
-        if(isGenerationEnded)
+        if(_isGenerationEnded)//Fix for nav mesh issue(it doesn't work in awake method)
         {
             navmesh.GetComponent<NavMeshGenerator>().GenerateNavMesh();
-            isGenerationEnded = false;
+            _isGenerationEnded = false;
         }
     }
+    ///
+    ///<summary>SimpleRandomWalk method generates hash set of point for tilemap rendering</summary>
+    ///<param name="distance"></param>
     protected HashSet<Vector2Int> GetFloorPoints()
     {
         Vector2Int currentPoint = startPoint;

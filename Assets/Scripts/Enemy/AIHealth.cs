@@ -6,7 +6,7 @@ public class AIHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private int maxHealth = 10;
     private Animator _anim;
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
     public int MaxHealth
     {
         get => maxHealth;
@@ -22,7 +22,7 @@ public class AIHealth : MonoBehaviour, IHealth
     public void Hurt(int damage, Vector2 knockback)
     {
         CurrentHealth -= damage;
-        rb.AddForce(knockback, ForceMode2D.Impulse);
+        _rb.AddForce(knockback, ForceMode2D.Impulse);
     }
     private int currentHealth;
     public bool isInvincible { get; set; }
@@ -48,7 +48,7 @@ public class AIHealth : MonoBehaviour, IHealth
     void Awake()
     {
         CurrentHealth = maxHealth;
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
 

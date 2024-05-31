@@ -8,7 +8,7 @@ public interface IHealth
     public int CurrentHealth{get; set;}
     public bool isInvincible{get;set;}
 
-    //TODO Invimcible animation
+    //TODO Invincible animation
     public void Death()
     {
 

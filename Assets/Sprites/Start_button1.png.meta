@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d816d44cf5115e00384cc87cdc89e80e
+guid: 5c583adb263eb904e9206fa0060d0303
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -53,7 +53,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -110,42 +110,38 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0425\u043F \u0444\u0443\u043B\u043B \u0431\u0435\u0437 \u043A\u043E\u043D\u0442\u0443\u0440\u0430_0"
+      name: Start_button1_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 16
-        width: 27
-        height: 5
+        x: 1
+        y: 12
+        width: 30
+        height: 11
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3faeb8b3b37360028e8dc2d49a47dc9
-      internalID: 2103789033
+      spriteID: 88a44982202da1e89aafcc2095c27e3e
+      internalID: 1578279446
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: -13, y: 1}
-      - {x: -13, y: 4}
-      - {x: 12, y: 4}
-      - {x: 12, y: 1}
+    outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "\u0425\u043F \u0444\u0443\u043B\u043B \u0431\u0435\u0437 \u043A\u043E\u043D\u0442\u0443\u0440\u0430_0": 2103789033
+      Start_button1_0: 1578279446
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

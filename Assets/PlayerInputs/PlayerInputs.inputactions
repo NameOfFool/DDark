@@ -2,7 +2,7 @@
     "name": "PlayerInputs",
     "maps": [
         {
-            "name": "Base",
+            "name": "Player",
             "id": "51014eab-85a9-4259-80b5-b1c8160e0c58",
             "actions": [
                 {
@@ -18,6 +18,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "9eb5f40e-a906-40d2-9e42-78c375aeb08a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuInteraction",
+                    "type": "Button",
+                    "id": "e8be22dc-8423-43e5-8336-fb6ecd69a8ae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -88,6 +97,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f9126ba-cd47-4fc8-80d8-252e01485c07",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuInteraction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
