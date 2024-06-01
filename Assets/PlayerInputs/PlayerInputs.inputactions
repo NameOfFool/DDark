@@ -26,7 +26,7 @@
                 {
                     "name": "MenuInteraction",
                     "type": "Button",
-                    "id": "e8be22dc-8423-43e5-8336-fb6ecd69a8ae",
+                    "id": "1e3662d3-0525-4eb4-95d0-a9da7a244b72",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -102,7 +102,7 @@
                 },
                 {
                     "name": "",
-                    "id": "7f9126ba-cd47-4fc8-80d8-252e01485c07",
+                    "id": "097b8167-eaba-4572-a23b-3ba397947905",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -112,7 +112,36 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "9fdb7aac-9952-4568-a1f4-4d6db101dd6a",
+            "actions": [],
+            "bindings": []
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

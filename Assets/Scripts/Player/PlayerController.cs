@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
         arm = GetComponentInChildren<MainArmController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _rb.velocity = new(moveInput.x * CurrentMoveSpeed, moveInput.y * CurrentMoveSpeed);

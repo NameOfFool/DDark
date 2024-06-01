@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuCanvas;
 
-    private bool isPaused;
+    private bool isPaused = false;
 
     private void Start()
     {
         _mainMenuCanvas.SetActive(false);
     }
-    private void Update()
+
+    public void PauseToggle(InputAction.CallbackContext context)
     {
-        if(InputManager.instance.MenuToggleInput)
-        {
-            if(!isPaused)
+        if (context.started)
+            if (!isPaused)
             {
                 Pause();
             }
@@ -26,7 +27,6 @@ public class MenuManager : MonoBehaviour
             {
                 Unpause();
             }
-        }
     }
     public void Pause()
     {
