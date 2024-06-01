@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, IHealth
@@ -44,6 +46,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
 
     public bool isInvincible { get; set; }
+    public UnityEvent OnBegin { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public UnityEvent OnDone { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void Awake()
     {
@@ -61,5 +65,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
     void Update()
     {
 
+    }
+
+    public IEnumerator ResetVelocity()
+    {
+        throw new System.NotImplementedException();
     }
 }

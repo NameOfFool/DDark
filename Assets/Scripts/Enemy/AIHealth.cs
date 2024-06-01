@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AIHealth : MonoBehaviour, IHealth
 {
@@ -21,8 +21,10 @@ public class AIHealth : MonoBehaviour, IHealth
     }
     public void Hurt(int damage, Vector2 knockback)
     {
+        StopAllCoroutines();
         CurrentHealth -= damage;
-        _rb.AddForce(knockback, ForceMode2D.Impulse);
+        _rb.AddForce(knockback * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+        StartCoroutine(ResetVelocity());
     }
     private int currentHealth;
     public bool isInvincible { get; set; }
@@ -45,6 +47,10 @@ public class AIHealth : MonoBehaviour, IHealth
                 }
         }
     }
+
+    public UnityEvent OnBegin {get;set;}
+    public UnityEvent OnDone {get;set;}
+
     void Awake()
     {
         CurrentHealth = maxHealth;
@@ -55,5 +61,12 @@ public class AIHealth : MonoBehaviour, IHealth
     void Update()
     {
 
+    }
+
+    public IEnumerator ResetVelocity()
+    {
+        yield return new WaitWhile(() =>isInvincible);
+        _rb.velocity = Vector2.zero;
+        OnDone?.Invoke();
     }
 }
