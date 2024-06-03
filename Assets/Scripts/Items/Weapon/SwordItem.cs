@@ -16,7 +16,7 @@ public class SwordItem : MonoBehaviour
 
     public void HurtTarget(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out IHealth health))
+        if (collision.gameObject.TryGetComponent(out IDamageable health))
         {
             health.Hurt(1, new Vector2(transform.lossyScale.x * 5, 0));
         }

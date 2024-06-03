@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.AI;
-using NavMeshPlus.Components;
 
 public class RandomWalkLevelGeneration : AbstractGenerator
 {
@@ -15,15 +14,12 @@ public class RandomWalkLevelGeneration : AbstractGenerator
     [SerializeField] private GameObject player;
     [SerializeField] private bool generateEnemy;
     [SerializeField] private GameObject enemy;
-    [SerializeField] private GameObject navmesh;
-    private bool _isGenerationEnded = false;
 
     public override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPoints = GetFloorPoints();
         visualiser.PaintFloorTiles(floorPoints);
         WallGenerator.CreateWalls(floorPoints, visualiser);
-        _isGenerationEnded = true;
         //Instantiate(player, new Vector3Int(0,0), Quaternion.identity);
     }
     void Awake()
@@ -31,14 +27,6 @@ public class RandomWalkLevelGeneration : AbstractGenerator
         RunProceduralGeneration();
         if (generateEnemy)
             Instantiate(enemy, new Vector3Int(-1, -1, 0), Quaternion.identity);
-    }
-    private void FixedUpdate()
-    {
-        if (_isGenerationEnded)//Fix for nav mesh issue(it doesn't work in awake method)
-        {
-            navmesh.GetComponent<NavMeshGenerator>().GenerateNavMesh();
-            _isGenerationEnded = false;
-        }
     }
     ///
     ///<summary>SimpleRandomWalk method generates hash set of point for tilemap rendering</summary>

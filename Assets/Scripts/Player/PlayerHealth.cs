@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour, IHealth
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     private Animator _anim;
     [SerializeField] private Slider healthBar;
     private Rigidbody2D rb;
-    public void Death()
+    public void Die()
     {
 
     }

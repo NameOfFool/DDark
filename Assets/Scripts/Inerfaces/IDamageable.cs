@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IHealth
+public interface IDamageable
 {
     public int MaxHealth{get;set;}
     public int CurrentHealth{get; set;}
@@ -11,7 +11,7 @@ public interface IHealth
     public UnityEvent OnBegin{get;set;}
     public UnityEvent  OnDone{get;set;}
 
-    public void Death()
+    public void Die()
     {
 
     }
