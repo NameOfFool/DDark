@@ -33,12 +33,14 @@ public class MenuManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0;
 
+        InputManager.PlayerInput.SwitchCurrentActionMap("UI");
         OpenMainMenu();
     }
     public void Unpause()
     {
         isPaused = false;
         Time.timeScale = 1;
+        InputManager.PlayerInput.SwitchCurrentActionMap("Player");
 
         CloseAllMenus();
     }
@@ -49,5 +51,10 @@ public class MenuManager : MonoBehaviour
     public void CloseAllMenus()
     {
         _mainMenuCanvas.SetActive(false);
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("!!!");
     }
 }

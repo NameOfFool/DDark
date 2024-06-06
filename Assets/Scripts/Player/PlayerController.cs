@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    #region properties
     [Header("Player Properties")]
     public float MaxSpeed = 5f;
     public float CurrentMoveSpeed { get { return MaxSpeed; } }
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
             _isFacingRight = value;
         }
     }
+    #endregion
     private Vector2 moveInput;
     private Rigidbody2D _rb;
     private Animator _anim;
@@ -44,13 +46,12 @@ public class PlayerController : MonoBehaviour
         else if (moveInput.x < 0 && isFacingRight)
             isFacingRight = false;
     }
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(Vector2 target)
     {
-        moveInput = context.ReadValue<Vector2>();
+        moveInput = target;
     }
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack()
     {
-        if (context.started)
-            arm.Attack();
+        arm.Attack();
     }
 }
