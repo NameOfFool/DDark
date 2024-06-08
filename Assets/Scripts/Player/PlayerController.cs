@@ -1,57 +1,99 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    #region properties
     [Header("Player Properties")]
     public float MaxSpeed = 5f;
+    public float DashDuration = 0.1f;
+    public float DashCooldown = 3f;
     public float CurrentMoveSpeed { get { return MaxSpeed; } }
-    private bool _isFacingRight = true;
-    public bool isFacingRight
-    {
-        get => _isFacingRight;
-        set
-        {
-            if (_isFacingRight != value)
-            {
-                transform.localScale *= new Vector2(-1, 1);
-                
-            }
-            _isFacingRight = value;
-        }
-    }
-    #endregion
-    private Vector2 moveInput;
+    [SerializeField]private InputReader inputReader;
+    private Vector2 _moveInput;
     private Rigidbody2D _rb;
     private Animator _anim;
-    private MainArmController arm;
+    private bool _canMove = true;
+    private GameObject _interactableObject;
+    private const string _velocityX = "VelocityX";
+    private const string _velocityY = "VelocityY";
+    private const string _lastX = "LastX";
+    private const string _lastY = "LastY";
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        arm = GetComponentInChildren<MainArmController>();
+
     }
 
     void Update()
     {
-        _rb.velocity = new(moveInput.x * CurrentMoveSpeed, moveInput.y * CurrentMoveSpeed);
-        Flip();
+        if(_canMove)
+            Move();
     }
-    private void Flip()
+     private void Move()
     {
-        if (moveInput.x > 0 && !isFacingRight)
-            isFacingRight = true;
-        else if (moveInput.x < 0 && isFacingRight)
-            isFacingRight = false;
+        _rb.velocity = _moveInput * CurrentMoveSpeed;
+        _anim.SetFloat(_velocityX, _rb.velocity.x);
+        _anim.SetFloat(_velocityY, _rb.velocity.y);
+        if (_rb.velocity != Vector2.zero)
+        {
+            _anim.SetFloat(_lastX, _rb.velocity.x);
+            _anim.SetFloat(_lastY, _rb.velocity.y);
+        }
     }
-    public void OnMove(Vector2 target)
+    private void OnTriggerEnter2D(Collider2D other)//TODO Rework
     {
-        moveInput = target;
+        if(other.TryGetComponent<Item>(out Item item))
+        {
+            _interactableObject = other.gameObject;
+        }      
     }
-    public void OnAttack()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        arm.Attack();
+        if(other.TryGetComponent<Item>(out Item item))
+        {
+            _interactableObject = null;
+        }
     }
+    private void Dash()
+    {
+        _rb.AddForce(_moveInput * 10f,ForceMode2D.Impulse);
+    }
+    #region Unuty Events
+    private void OnEnable()
+    {
+        inputReader.MoveInput += OnMove;
+        inputReader.DashInput += OnDash;
+        inputReader.InteractInput +=OnInteract;
+    }
+    private void OnDisable()
+    {
+        inputReader.MoveInput -= OnMove;
+        inputReader.DashInput -= OnDash;
+        inputReader.InteractInput -=OnInteract;
+    }
+    private void OnMove(Vector2 moveInput)
+    {
+        _moveInput = moveInput;
+    }
+    private async void OnDash()
+    {
+        _canMove = false;
+        Dash();
+        inputReader.DashInput -= OnDash;
+        await UniTask.WaitForSeconds(DashDuration);
+        _canMove = true;
+        await UniTask.WaitForSeconds(DashCooldown);
+        inputReader.DashInput += OnDash;
+    }
+    private void OnInteract()
+    {
+        if(_interactableObject != null)
+        {
+            _interactableObject.GetComponent<Item>().Interact(gameObject);
+        }
+    }
+    #endregion
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8136790206156324451}
   - component: {fileID: 8801207528304904348}
-  - component: {fileID: 7145579755199184229}
   - component: {fileID: 8362433747139541534}
   m_Layer: 0
   m_Name: Right arm
@@ -86,18 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7145579755199184229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009279907870199315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6e4d1c441728f246a9dec18df776378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8362433747139541534
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -240,8 +227,8 @@ GameObject:
   - component: {fileID: 638623284449850398}
   - component: {fileID: 2233624384578043719}
   - component: {fileID: 878853474007848633}
-  - component: {fileID: 8740535930523307806}
   - component: {fileID: 7150792725640072161}
+  - component: {fileID: 2627124686449662492}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -358,6 +345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSpeed: 5
+  DashDuration: 0.15
+  DashCooldown: 3
+  inputReader: {fileID: 11400000, guid: 6e972b8556a4d1915b2d580443c72620, type: 2}
 --- !u!61 &878853474007848633
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -403,20 +393,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3019355, y: 0.5416745}
   m_EdgeRadius: 0
---- !u!114 &8740535930523307806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3572678436235852610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b8e5dd8b27a4c4db0109ffbd690067, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  maxHealth: 100
 --- !u!95 &7150792725640072161
 Animator:
   serializedVersion: 5
@@ -438,3 +414,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2627124686449662492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3572678436235852610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33b25d2de974664e95b3766c1193d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: afc5e73cebf0166ca8706abf303b76a7, type: 2}
+  RightArm: {fileID: 1009279907870199315}
+  LeftArm: {fileID: 2779870515654713297}

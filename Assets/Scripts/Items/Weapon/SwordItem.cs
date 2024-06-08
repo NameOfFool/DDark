@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordItem : MonoBehaviour
+public class SwordItem : Item
 {
     private Animator anim;
     void Awake()
@@ -21,11 +22,9 @@ public class SwordItem : MonoBehaviour
             health.Hurt(1, new Vector2(transform.lossyScale.x * 5, 0));
         }
     }
-    private void OnTriggerEnter2D(Collider2D col)
+    public override void Interact(GameObject src)
     {
-        if(col.gameObject.TryGetComponent(out MainArmController arm))
-        {
-            arm.Item = this;
-        }
+        src.GetComponent<Inventory>().inventory.AddRightArmItem(item);
+        Destroy(gameObject);
     }
 }

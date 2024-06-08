@@ -4,57 +4,57 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _mainMenuCanvas;
+    private UIDocument _mainMenu;
+    [SerializeField] private InputReader m_inputReader;
 
     private bool isPaused = false;
 
     private void Start()
     {
-        _mainMenuCanvas.SetActive(false);
+        _mainMenu = GetComponent<UIDocument>();
     }
 
-    public void PauseToggle(InputAction.CallbackContext context)
+    public void PauseToggle()
     {
-        if (context.started)
-            if (!isPaused)
-            {
-                Pause();
-            }
-            else
-            {
-                Unpause();
-            }
+        if (!isPaused)
+        {
+            Pause();
+        }
+        else
+        {
+            Unpause();
+        }
     }
     public void Pause()
     {
         isPaused = true;
         Time.timeScale = 0;
+        
 
-        InputManager.PlayerInput.SwitchCurrentActionMap("UI");
         OpenMainMenu();
     }
     public void Unpause()
     {
         isPaused = false;
         Time.timeScale = 1;
-        InputManager.PlayerInput.SwitchCurrentActionMap("Player");
 
         CloseAllMenus();
     }
     public void OpenMainMenu()
     {
-        _mainMenuCanvas.SetActive(true);
+        _mainMenu.enabled = true;
     }
     public void CloseAllMenus()
     {
-        _mainMenuCanvas.SetActive(false);
+        _mainMenu.enabled = false;
     }
     public void ExitGame()
     {
         Application.Quit();
-        Debug.Log("!!!");
     }
+    
 }

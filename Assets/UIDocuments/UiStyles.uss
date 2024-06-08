@@ -20,6 +20,7 @@
     border-bottom-width: 0;
     border-top-width: 1px;
 }
+
 .slotContainer {
     width: 128px;
     height: 128px;
@@ -29,7 +30,7 @@
     border-top-color: rgb(48, 48, 48);
     border-bottom-color: rgb(48, 48, 48);
     background-color: rgb(9, 19, 21);
-    background-image: url('/Assets/Sprites/ItemSlotBackground.png');
+    background-image: url("project://database/Assets/Sprites/ItemSlotBackground.png?fileID=2800000&guid=fad4123b73639ff42b0a3dfa5b5207a9&type=3#ItemSlotBackground");
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -40,4 +41,8 @@
     padding: 15px;
     flex-shrink: 0;
     flex-grow: 1;
+    width: auto;
+    height: auto;
+    min-width: 128px;
+    min-height: 128px;
 }
