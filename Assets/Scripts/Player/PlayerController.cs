@@ -1,16 +1,16 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Properties")]
-    public float MaxSpeed = 5f;
-    public float DashDuration = 0.1f;
-    public float DashCooldown = 3f;
+    [SerializeField] private float MaxSpeed = 5f;
+    [SerializeField] private float DashDuration = 0.1f;
+    [SerializeField] private float DashCooldown = 3f;
+    [SerializeField] private float DashForce = 10f;
     public float CurrentMoveSpeed { get { return MaxSpeed; } }
-    [SerializeField]private InputReader inputReader;
+    [SerializeField] private InputReader inputReader;
     private Vector2 _moveInput;
     private Rigidbody2D _rb;
     private Animator _anim;
@@ -29,10 +29,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(_canMove)
+        if (_canMove)
             Move();
     }
-     private void Move()
+    private void Move()
     {
         _rb.velocity = _moveInput * CurrentMoveSpeed;
         _anim.SetFloat(_velocityX, _rb.velocity.x);
@@ -45,34 +45,34 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)//TODO Rework
     {
-        if(other.TryGetComponent<Item>(out Item item))
+        if (other.TryGetComponent<Item>(out Item item))
         {
             _interactableObject = other.gameObject;
-        }      
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.TryGetComponent<Item>(out Item item))
+        if (other.TryGetComponent<Item>(out Item item))
         {
             _interactableObject = null;
         }
     }
     private void Dash()
     {
-        _rb.AddForce(_moveInput * 10f,ForceMode2D.Impulse);
+        _rb.AddForce(_moveInput * DashForce, ForceMode2D.Impulse);
     }
     #region Unuty Events
     private void OnEnable()
     {
         inputReader.MoveInput += OnMove;
         inputReader.DashInput += OnDash;
-        inputReader.InteractInput +=OnInteract;
+        inputReader.InteractInput += OnInteract;
     }
     private void OnDisable()
     {
         inputReader.MoveInput -= OnMove;
         inputReader.DashInput -= OnDash;
-        inputReader.InteractInput -=OnInteract;
+        inputReader.InteractInput -= OnInteract;
     }
     private void OnMove(Vector2 moveInput)
     {
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnInteract()
     {
-        if(_interactableObject != null)
+        if (_interactableObject != null)
         {
             _interactableObject.GetComponent<Item>().Interact(gameObject);
         }

@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.TerrainTools;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class UIInventorySlot : VisualElement
@@ -20,6 +16,10 @@ public class UIInventorySlot : VisualElement
     {
         Icon.image = item.icon.texture;
         this.item = item;
+    }
+    public void DropItem()
+    {
+
     }
     #region UXML
     public new class UxmlFactory : UxmlFactory<UIInventorySlot,UxmlTraits>{}

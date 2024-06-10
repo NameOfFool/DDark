@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Slots:
   - item: {fileID: 11400000, guid: 65f36339430dc12b183ba85bcb7cfaa5, type: 2}
+  RightArmSlot:
+    item: {fileID: 11400000, guid: 65f36339430dc12b183ba85bcb7cfaa5, type: 2}
+  LeftArmSlot:
+    item: {fileID: 0}
+  ArmorSlot:
+    item: {fileID: 0}

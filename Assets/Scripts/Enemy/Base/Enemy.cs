@@ -5,9 +5,9 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour, IDamageable, IMoveable, ITriggerCheckable
 {
     #region Damageable props
-    [SerializeField] private int maxHealth = 10;
+    [SerializeField] private float maxHealth = 10;
     private Animator _anim;
-    public int MaxHealth
+    public float MaxHealth
     {
         get => maxHealth;
         set
@@ -19,16 +19,16 @@ public class Enemy : MonoBehaviour, IDamageable, IMoveable, ITriggerCheckable
     {
         Destroy(gameObject);
     }
-    public void Hurt(int damage, Vector2 knockback)
+    public void Hurt(float damage, Vector2 knockback)
     {
         StopAllCoroutines();
         CurrentHealth -= damage;
         RB.AddForce(knockback * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
         StartCoroutine(ResetVelocity());
     }
-    private int currentHealth;
+    private float currentHealth;
     public bool isInvincible { get; set; }
-    public int CurrentHealth
+    public float CurrentHealth
     {
         get => currentHealth;
         set

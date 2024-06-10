@@ -46,3 +46,73 @@
     min-width: 128px;
     min-height: 128px;
 }
+
+.slotContainer:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+.unity-progerss-bar__progress {
+    background-image: url("project://database/Assets/Sprites/HP_Fill.png?fileID=2103789033&guid=d816d44cf5115e00384cc87cdc89e80e&type=3#Хп фулл без контура_0");
+}
+
+#PlayerHealth #unity-progress-bar {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+    max-width: none;
+    max-height: none;
+    min-height: auto;
+    min-width: auto;
+}
+
+#PlayerHealth Label {
+    visibility: hidden;
+}
+
+#PlayerHealth {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+#PlayerHealth .unity-progress-bar__progress {
+    background-image: url("project://database/Assets/Sprites/HP_Fill.png?fileID=2103789033&guid=d816d44cf5115e00384cc87cdc89e80e&type=3#Хп фулл без контура_0");
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-scale-mode: scale-and-crop;
+    max-width: none;
+    max-height: none;
+    min-width: auto;
+    min-height: auto;
+    -unity-slice-left: 10;
+    -unity-slice-top: -1;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+#PlayerHealth .unity-progress-bar__background {
+    background-image: url("project://database/Assets/Sprites/HP_Background.png?fileID=338511158&guid=7889c05995184a84084f3a54b9eb4a47&type=3#Пустые хп_0");
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-scale-mode: scale-and-crop;
+    max-width: none;
+    max-height: none;
+    min-height: auto;
+    min-width: auto;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}

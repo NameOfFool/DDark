@@ -1,11 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UIDocuments/UiStyles.uss?fileID=7433441132597879392&amp;guid=c69b2abefe27272478ad88929d13fc61&amp;type=3#UiStyles" />
-    <ui:VisualElement name="Container" style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:VisualElement name="Inventory" usage-hints="None" class="inventory" style="opacity: 1; visibility: visible; overflow: visible; display: flex; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; background-color: rgb(28, 32, 36); border-left-color: rgb(255, 197, 0); border-right-color: rgb(255, 197, 0); border-top-color: rgb(255, 197, 0); border-bottom-color: rgb(255, 197, 0); justify-content: flex-start; align-self: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-direction: column;">
-            <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="font-size: 24px; color: rgb(255, 197, 0); border-left-color: rgb(64, 74, 82); border-right-color: rgb(64, 74, 82); border-top-color: rgb(64, 74, 82); border-bottom-color: rgb(64, 74, 82); border-bottom-width: 5px;" />
-            <ui:VisualElement name="InventoryContainer" style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement name="EquipmentContainer" style="flex-grow: 1; flex-wrap: wrap; flex-direction: row; justify-content: center; width: 25%; max-width: 25%;" />
-                <ui:VisualElement name="SlotContainer" style="flex-grow: 3; flex-wrap: wrap; flex-direction: row; justify-content: center; flex-shrink: 1;" />
+    <ui:VisualElement name="Container" style="flex-grow: 1;">
+        <ui:ProgressBar value="22" title="my-progress" name="PlayerHealth" style="width: 170px; height: 50px;" />
+        <ui:VisualElement name="Menu" style="flex-grow: 1; align-items: center; justify-content: center;">
+            <ui:VisualElement name="GhotsIcon" style="flex-grow: 1; width: 128px; height: 128px; max-width: 128px; max-height: 128px; visibility: hidden;" />
+            <ui:VisualElement name="Inventory" usage-hints="None" class="inventory" style="opacity: 1; visibility: visible; overflow: visible; display: flex; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; background-color: rgb(28, 32, 36); border-left-color: rgb(255, 197, 0); border-right-color: rgb(255, 197, 0); border-top-color: rgb(255, 197, 0); border-bottom-color: rgb(255, 197, 0); justify-content: flex-start; align-self: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-direction: column;">
+                <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="font-size: 24px; color: rgb(255, 197, 0); border-left-color: rgb(64, 74, 82); border-right-color: rgb(64, 74, 82); border-top-color: rgb(64, 74, 82); border-bottom-color: rgb(64, 74, 82); border-bottom-width: 5px;" />
+                <ui:VisualElement name="InventoryContainer" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement name="EquipmentContainer" style="flex-grow: 1; flex-wrap: wrap; flex-direction: row; justify-content: center; width: 25%; max-width: 25%;" />
+                    <ui:VisualElement name="SlotContainer" style="flex-grow: 3; flex-wrap: wrap; flex-direction: row; justify-content: center; flex-shrink: 1;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

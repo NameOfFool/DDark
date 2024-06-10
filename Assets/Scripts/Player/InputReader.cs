@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -11,6 +8,7 @@ public class InputReader : ScriptableObject, PlayerInputs.IMovementActions
     public event UnityAction<Vector2> MoveInput;
     public event UnityAction InventoryInput;
     public event UnityAction DashInput;
+    public event UnityAction AttackInput;
     public event UnityAction InteractInput;
 
     public PlayerInputs Input;
